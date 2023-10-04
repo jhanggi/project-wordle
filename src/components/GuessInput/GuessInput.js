@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function GuessInput({ submitGuess }) {
+function GuessInput({ submitGuess, disabled }) {
   const [guess, setGuess] = useState("");
 
   return (
@@ -17,6 +17,7 @@ function GuessInput({ submitGuess }) {
         id="guess-input"
         type="text"
         value={guess}
+        disabled={disabled}
         onChange={(e) => setGuess(e.target.value.toLocaleUpperCase())}
         required
         minLength={5}
