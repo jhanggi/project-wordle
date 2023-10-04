@@ -1,22 +1,21 @@
 import React from "react";
 import { range } from "../../utils";
+import { checkGuess } from "../../game-helpers";
 
-const emptyString = (len) =>
-  range(len)
-    .map(() => " ")
-    .join("");
+function Cell({ letter, status }) {
+  return <span className={`cell ${status}`}>{letter}</span>;
+}
 
-function GuessRow({ guess }) {
-  const guessWithFallback = guess || emptyString(5);
-  const characters = guessWithFallback.split("");
+function GuessRow({ guess, answer }) {
+  const checkedGuess =
+    checkGuess(guess, answer) ??
+    range(5).map(() => ({ letter: "", status: "" }));
 
   return (
-    <div class="guess-results">
-      <p class="guess">
-        {characters.map((char, i) => (
-          <span key={i} class="cell">
-            {char}
-          </span>
+    <div className="guess-results">
+      <p className="guess">
+        {checkedGuess.map(({ letter, status }, i) => (
+          <Cell key={i} letter={letter} status={status} />
         ))}
       </p>
     </div>
