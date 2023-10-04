@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function GuessInput() {
+function GuessInput({ submitGuess }) {
   const [guess, setGuess] = useState("");
 
   return (
@@ -8,7 +8,7 @@ function GuessInput() {
       className="guess-input-wrapper"
       onSubmit={(e) => {
         e.preventDefault();
-        console.info({ guess });
+        submitGuess(guess);
         setGuess("");
       }}
     >
